@@ -1,6 +1,6 @@
 // tic-tac-toe.js, module that contains the functions for the tic-tac-toe game.
 /**
- * Adam Soliman
+ * Adam Soliman // TO-DO: Review Documentation
  */
 
 function repeat(initVal, length) {
@@ -119,12 +119,76 @@ function placeLetter(board, letter, algebraicNotation) {
 /**
  * Examines the board for a winner and returns the winner if there is one.
  * 
- * 
  * @param {Array} board - single dimensional Array representing the board
  * @returns {String} - The letter of the winning player. If there is no winner, it returns undefined.
  */
 function getWinner(board) {
-  // TO-DO: Implement this function!!!!!!!!!!!!!!!!
+  const num = Math.sqrt(board.length); // Number of rows and columns
+  // Check columns
+  for (let i = 0; i < num; i++) {
+    const mySet = new Set(); // new set for each column to store unique values
+    for (let n = i; n < board.length; n += num) {
+      mySet.add(board[n]);
+      if (mySet.size > 1) {
+        break;
+      }
+    }
+    if (mySet.size === 1) {
+       if (mySet.has("X")) {
+         return "X";
+       } else if (mySet.has("O")) {
+         return "O";
+       }
+    }
+  }
+  // Check rows
+  for (let i = 0; i < board.length; i += num) {
+    const mySet = new Set(); // new set for each row to store unique values
+    for (let n = 0; n < num; n++) {
+      mySet.add(board[i+n]);
+      if (mySet.size > 1) {
+        break;
+      }
+    }
+    if (mySet.size === 1) {
+       if (mySet.has("X")) {
+         return "X";
+       } else if (mySet.has("O")) {
+         return "O";
+       }
+    }
+  }
+  // Check diagonal from top left to bottom right
+  let mySet = new Set();
+  for (let i = 0; i < board.length; i += num+1) {
+    mySet.add(board[i]);
+    if (mySet.size > 1) {
+      break;
+    }
+  }
+  if (mySet.size === 1) {
+    if (mySet.has("X")) {
+      return "X";
+    } else if (mySet.has("O")) {
+      return "O";
+    }
+  }
+  mySet = new Set(); // get a new set for the other diagonal
+  for (let i = num-1; i < board.length-1; i += num-1) {
+    // I did the math you have to neglect the last index otherwise it'll mistakenly count
+    mySet.add(board[i]);
+    if (mySet.size > 1) {
+      break;
+    }
+  }
+  if (mySet.size === 1) {
+    if (mySet.has("X")) {
+      return "X";
+    } else if (mySet.has("O")) {
+      return "O";
+    }
+  }
+  return undefined; // Failed all possible checks, no winner
 }
 
 /**
@@ -166,7 +230,7 @@ export {
   setBoardCell,
   algebraicToRowCol,
   placeLetter,
-  // getWinner,
+  getWinner,
   isBoardFull,
   isValidMove
 };
