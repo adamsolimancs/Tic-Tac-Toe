@@ -20,5 +20,15 @@
     "url": "https://github.com/nyu-csci-ua-0467-001-002-spring-2025/homework01-adamsolimancs/issues"
   },
   "homepage": "https://github.com/nyu-csci-ua-0467-001-002-spring-2025/homework01-adamsolimancs#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "chai": "^5.1.2",
+    "eslint": "^9.19.0",
+    "globals": "^15.14.0",
+    "mocha": "^11.1.0"
+  }
 }
