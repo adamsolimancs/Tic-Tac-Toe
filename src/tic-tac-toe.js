@@ -12,19 +12,6 @@ function generateBoard(rows, cols, initialValue) {
   return repeat(blankValue, rows * cols);
 }
 
-export {
-  generateBoard,
-  boardFromString,
-  rowColToIndex,
-  indexToRowCol,
-  setBoardCell,
-  algebraicToRowCol,
-  placeLetter,
-  // getWinner,
-  isBoardFull,
-  isValidMove
-}
-
 /**
  * Returns a single dimensional Array representation of a Tic Tac Toe board based on the inputted string.
  * The length of the string should be a perfect square.
@@ -33,12 +20,12 @@ export {
  */
 function boardFromString(s) {
   if (!Number.isInteger(Math.sqrt(s.length))) {
-    return null;        // Not a perfect square
+    return null; // Not a perfect square
   }
   const board = [];
   for (let i = 0; i < s.length; i += 1) {
     if (s[i] !== "X" && s[i] !== "O" && s[i] !== " ") {
-      return null;      // Invalid character
+      return null; // Invalid character
     } else {
       board.push(s[i]);
     }
@@ -54,7 +41,7 @@ function boardFromString(s) {
  * @param {Number} col - column number
  */
 function rowColToIndex(board, row, col) {
-  const num = Math.sqrt(board.length);  // Number of rows and columns
+  const num = Math.sqrt(board.length); // Number of rows and columns
   return row * num + col;
 }
  
@@ -65,9 +52,9 @@ function rowColToIndex(board, row, col) {
  */
 function indexToRowCol(board, i) {
   const obj = {};
-  const num = Math.sqrt(board.length);  // Number of rows and columns
+  const num = Math.sqrt(board.length); // Number of rows and columns
   obj.row = Math.floor(i / num);
-  obj.col = i % num;    // column index is the offset when divided by the number of columns
+  obj.col = i % num; // column index is the offset when divided by the number of columns
   return obj;
 }
 
@@ -80,7 +67,7 @@ function indexToRowCol(board, i) {
  */
 function setBoardCell(board, letter, row, col) {
   const index = rowColToIndex(board, row, col);
-  const newBoard = board.slice();  // Shallow copy
+  const newBoard = board.slice(); // Shallow copy
   newBoard[index] = letter;
   return newBoard;
 }
@@ -97,10 +84,10 @@ function algebraicToRowCol(algebraicNotation) {
   if (algebraicNotation === null || algebraicNotation.length <= 1 || algebraicNotation.length > 3) {
     return undefined;
   }
-  let r = algebraicNotation[0];
-  let c = algebraicNotation.slice(1);
+  const r = algebraicNotation[0];
+  const c = algebraicNotation.slice(1);
   if (!isNaN(r) || r.charCodeAt() < 65 || r.charCodeAt() > 90 || isNaN(c)) {
-    return undefined;   // Invalid input
+    return undefined; // Invalid input
   }
   for (let i = 0; i < c.length; i += 1) {
     // Checks each letter of c for an invalid input. This is bc parseInt() has some odd behavior we have to account for.
@@ -109,7 +96,7 @@ function algebraicToRowCol(algebraicNotation) {
     }
   }
   const obj = {};
-  obj.row = r.charCodeAt() - 65;  // ASCII value of 'A' is 65
+  obj.row = r.charCodeAt() - 65; // ASCII value of 'A' is 65
   obj.col = parseInt(c) - 1;
   return obj;
 }
@@ -149,7 +136,7 @@ function getWinner(board) {
  * @returns true if there are no empty cells left in the board, false otherwise
  */
 function isBoardFull(board) {
-  return !board.some(cell => cell === " ");   // ! flip because if there is no empty cell, the board is full.
+  return !board.some(cell => cell === " "); // ! flip because if there is no empty cell, the board is full.
   // .some() returns true if one element passes the condition, if one cell is empty.
 }
 
@@ -165,7 +152,21 @@ function isValidMove(board, algebraicNotation) {
   if (obj === undefined) {
     return false;
   }
-  let index = rowColToIndex(board, obj.row, obj.col);
+  const index = rowColToIndex(board, obj.row, obj.col);
   return board[index] === " ";
 }
 
+
+
+export {
+  generateBoard,
+  boardFromString,
+  rowColToIndex,
+  indexToRowCol,
+  setBoardCell,
+  algebraicToRowCol,
+  placeLetter,
+  // getWinner,
+  isBoardFull,
+  isValidMove
+};
