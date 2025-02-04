@@ -1,6 +1,6 @@
 // tic-tac-toe.js, module that contains the functions for the tic-tac-toe game.
 /**
- * Adam Soliman // TO-DO: Review Documentation
+ * Adam Soliman
  */
 
 function repeat(initVal, length) {
@@ -16,7 +16,9 @@ function generateBoard(rows, cols, initialValue) {
  * Returns a single dimensional Array representation of a Tic Tac Toe board based on the inputted string.
  * The length of the string should be a perfect square.
  * Only spaces ( ), X's and O's are in the string otherwise it will return null.
+ * 
  * @param {String} s - string representation of the board.
+ * @returns {Array} - single dimensional Array representation of the board.
  */
 function boardFromString(s) {
   if (!Number.isInteger(Math.sqrt(s.length))) {
@@ -39,6 +41,7 @@ function boardFromString(s) {
  * @param {Array} board - single dimensional Array representing the board.
  * @param {Number} row - row number
  * @param {Number} col - column number
+ * @returns {Number} - index in the one dimensional Array representation of a Tic Tac Toe board.
  */
 function rowColToIndex(board, row, col) {
   const num = Math.sqrt(board.length); // Number of rows and columns
@@ -49,6 +52,7 @@ function rowColToIndex(board, row, col) {
  * Returns an object containing two properties, row and col, representing the row and column numbers that the index maps to.
  * @param {Array} board - single dimensional Array representing the board
  * @param {Number} i - index.
+ * @returns {Object} - Object with row and col properties.
  */
 function indexToRowCol(board, i) {
   const obj = {};
@@ -62,8 +66,9 @@ function indexToRowCol(board, i) {
  * Returns a shallow copy of the input Array representing the board where the cell at row and col is set to the value of letter.
   * @param {Array} board - single dimensional Array representing the board
   * @param {String} letter - X or O
-  * @param {Number} row 
-  * @param {Number} col 
+  * @param {Number} row - row number
+  * @param {Number} col - column number
+  * @returns {Array} - shallow copy of the input Array representing the board where the cell at row and col is set to the value of letter.
  */
 function setBoardCell(board, letter, row, col) {
   const index = rowColToIndex(board, row, col);
@@ -75,7 +80,7 @@ function setBoardCell(board, letter, row, col) {
 /**
  * Returns an object containing two properties, row and col, representing the row and column numbers that the algebraicNotation maps to.
  * Example input: A1, B7, C14, etc.
- * @param {String} algebraicNotation
+ * @param {String} algebraicNotation - A1, B7, C14, etc.
  * @returns {Object} - Object with row and col properties.
  * @example
  * (for example, {"row": 1, "col": 1})
@@ -107,6 +112,7 @@ function algebraicToRowCol(algebraicNotation) {
  * @param {Array} board - single dimensional Array representing the board
  * @param {String} letter - X or O
  * @param {String} algebraicNotation - A1, B7, C14, etc.
+ * @returns {Array} - single dimensional Array representing the board where the cell at row and col is set to the value of letter.
  */
 function placeLetter(board, letter, algebraicNotation) {
   const obj = algebraicToRowCol(algebraicNotation);
@@ -219,7 +225,6 @@ function isValidMove(board, algebraicNotation) {
   const index = rowColToIndex(board, obj.row, obj.col);
   return board[index] === " ";
 }
-
 
 
 export {
